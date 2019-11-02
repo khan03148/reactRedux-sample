@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 
+import {BrowserRouter,Route , Switch} from 'react-router-dom';
+
+import {useSelector, useDispatch} from 'react-redux';
+
+import {Logout , SignIn } from './actions/actionsTypes';
+
+
 function App() {
+  // we store over Redcucers in varible to access easily so that why we use const
+  const counter = useSelector(state=> state.Counter);
+  const loger = useSelector(state=> state.loger);
+  
+  const dispatch = useDispatch();
+  
+  // we can not see boolean in browers ui that why we use console.log
+  console.log(loger.login);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  
+    <div className="App" >
+      <h1>Hello word {counter}</h1>
+      <p> {loger.name}</p>
+     
+      {/* we send our data by click and the send it as in dispatch funtion to Redcucers
+      so logout funtion check it first its action from actions.js and the send to reducers */}
+      <button onClick={() => { dispatch(Logout()) }}>change me!</button>
+      <button onClick={() => { dispatch(SignIn()) }}>SignIn!</button>
     </div>
+   
   );
 }
+
 
 export default App;
